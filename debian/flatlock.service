@@ -1,0 +1,16 @@
+[Unit]
+Description=Set software policies
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/share/flatlock/flatlock
+Restart=always
+RestartSec=2
+RestartPreventExitStatus=0
+StartLimitInterval=200
+StartLimitBurst=9
+
+[Install]
+WantedBy=multi-user.target
+Alias=software-policies.service
