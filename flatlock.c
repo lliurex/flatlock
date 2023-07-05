@@ -6,7 +6,9 @@ effectively blocking any attempts to manage sofware for non privileged users
 #include <stdio.h>
 #include <string.h>
 #include <dirent.h>
+#include <errno.h>
 #include <sys/mount.h>
+#include <sys/stat.h>
 
 int main () {
     struct dirent *pDirent;
@@ -30,6 +32,8 @@ int main () {
 		strcpy(newdir,"/home/");
 		strcat(newdir,tmp);
 		strcat(newdir,rundir);
+		if(mkdir(rundir, 0777) && errno != EEXIST)
+			printf("Error creating '%s'\n%m\n", rundir); 
 		mount(runtimesys,newdir,"",MS_BIND,"");
     }
     closedir (pDir);
