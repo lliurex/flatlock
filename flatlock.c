@@ -32,8 +32,8 @@ int main () {
 		strcpy(newdir,"/home/");
 		strcat(newdir,tmp);
 		strcat(newdir,rundir);
-		if(mkdir(rundir, 0777) && errno != EEXIST)
-			printf("Error creating '%s'\n%m\n", rundir); 
+		if(mkdir(newdir, 0777) && errno != EEXIST)
+			printf("Error creating '%s'\n%m\n", newdir); 
 		mount(runtimesys,newdir,"",MS_BIND,"");
     }
     closedir (pDir);
