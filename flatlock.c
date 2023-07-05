@@ -34,6 +34,7 @@ int main () {
 		strcat(newdir,rundir);
 		if(mkdir(newdir, 0777) && errno != EEXIST)
 			printf("Error creating '%s'\n%m\n", newdir); 
+		printf("Mounting '%s'\n%m\n", newdir); 
 		mount(runtimesys,newdir,"",MS_BIND,"");
     }
     closedir (pDir);
