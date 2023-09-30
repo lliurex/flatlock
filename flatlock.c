@@ -15,12 +15,14 @@ effectively blocking any attempts to manage sofware for non privileged users
 #include <sys/stat.h>
 #include <unistd.h>
 
-static int mkpath(const char *path, mode_t mode) {
+static int mkpath(const char *path, mode_t mode, char *userdir,int uid,int gid) {
 	char opath[PATH_MAX];
 	char *p;
 	size_t len;
+	char user[sizeof(userdir)];
 
 	strncpy(opath, path, sizeof(opath));
+	strncpy(user, userdir, sizeof(user));
 	opath[sizeof(opath) - 1] = '\0';
 	len = strlen(opath);
 	if (len == 0)
@@ -33,6 +35,8 @@ static int mkpath(const char *path, mode_t mode) {
 			*p = '\0';
 			if (access(opath, F_OK))
 				mkdir(opath, mode);
+				if (strlen(opath)>strlen(userdir))
+					chown(opath, uid, gid);
 			*p = '/';
 		}
 	if (access(opath, F_OK)) 
@@ -43,6 +47,7 @@ static int mkpath(const char *path, mode_t mode) {
 
 int main () {
     struct dirent *pDirent;
+    struct stat stats;
     DIR *pDir;
     pDir = opendir ("/home");
 	char * runtimesys="/var/lib/flatpak/runtime";
@@ -56,14 +61,17 @@ int main () {
 		{
 			continue;
 		}
-		char * tmp;
-		tmp=pDirent->d_name;
-		size_t len=strlen(tmp);
+		char * userdir;
+		userdir=pDirent->d_name;
+		size_t len=strlen(userdir);
 		char * newdir=(char *)malloc(len + strlen("/home/") + strlen(rundir) +1);
 		strcpy(newdir,"/home/");
-		strcat(newdir,tmp);
+		strcat(newdir,userdir);
+		strcat(userdir,newdir);
+		stat(newdir, &stats);
+
 		strcat(newdir,rundir);
-		if(mkpath(newdir, 0777) && errno != EEXIST)
+		if(mkpath(newdir, 0777,userdir,stats.st_uid,stats.st_gid) && errno != EEXIST)
 			printf("Error creating '%s'\n%m\n", newdir); 
 		printf("Mounting '%s'\n%m\n", newdir); 
 		mount(runtimesys,newdir,"",MS_BIND,"");
