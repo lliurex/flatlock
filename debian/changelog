@@ -1,4 +1,4 @@
-flatlock (1.1) focal; urgency=medium
+flatlock (1.2) focal; urgency=medium
 
   * BUG: Paths created without chown
 
