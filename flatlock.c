@@ -19,7 +19,7 @@ static int mkpath(const char *path, mode_t mode, char *userdir,int uid,int gid) 
 	char opath[PATH_MAX];
 	char *p;
 	size_t len;
-	char user[sizeof(userdir)];
+	char user[strlen(userdir)];
 
 	strncpy(opath, path, sizeof(opath));
 	strncpy(user, userdir, sizeof(user));
