@@ -1,4 +1,4 @@
-flatlock (1.1lliurex23) jammy; urgency=medium
+flatlock (1.2lliurex23) jammy; urgency=medium
 
   * BUG: paths created without chown
 
