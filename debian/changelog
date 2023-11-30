@@ -1,3 +1,9 @@
+flatlock (1.3) focal; urgency=medium
+
+  * Only mount if path exists (new users can install apps before ending first session)
+
+ -- Juanma1980 <juanma1980@gmail.com>  Thu, 30 Nov 2023 18:07:05 +0100
+
 flatlock (1.2) focal; urgency=medium
 
   * BUG: Paths created without chown
