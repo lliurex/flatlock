@@ -1,4 +1,4 @@
-flatlock (1.2lliurex23) jammy; urgency=medium
+flatlock (1.3lliurex23) jammy; urgency=medium
 
   * Only mount if path exists (new users can install apps before ending first session)
 
