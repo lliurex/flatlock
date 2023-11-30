@@ -1,5 +1,11 @@
 flatlock (1.2lliurex23) jammy; urgency=medium
 
+  * Only mount if path exists (new users can install apps before ending first session)
+
+ -- Juanma1980 <juanma1980@gmail.com>  Thu, 30 Nov 2023 18:03:51 +0100
+
+flatlock (1.2lliurex23) jammy; urgency=medium
+
   * BUG: paths created without chown
 
  -- Juanma1980 <juanma1980@gmail.com>  Sat, 30 Sep 2023 11:18:25 +0200
