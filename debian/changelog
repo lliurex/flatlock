@@ -1,3 +1,9 @@
+flatlock (1.4lliurex23) jammy; urgency=medium
+
+  * Only enable if path /usr/share/flatlock/flatlock.enable exists
+
+ -- Juanma1980 <juanma1980@gmail.com>  Wed, 21 Aug 2024 12:24:19 +0200
+
 flatlock (1.3lliurex23) jammy; urgency=medium
 
   * Only mount if path exists (new users can install apps before ending first session)
