@@ -1,6 +1,7 @@
 [Unit]
 Description=Set software policies
 After=multi-user.target
+ConditionPathExists=/usr/share/flatlock/flatlock.enable
 
 [Service]
 Type=simple
